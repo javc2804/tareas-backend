@@ -1,6 +1,4 @@
-// controllers/userController.ts
 import { Request, Response } from "express";
-import mongoose from "mongoose";
 import User from "../models/User";
 
 export const getUser = async (req: Request, res: Response) => {

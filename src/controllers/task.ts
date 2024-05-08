@@ -1,10 +1,9 @@
-// controllers/taskController.ts
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import Task from "../models/Task";
 
 export const getTasks = async (req: Request, res: Response) => {
-  const tasks = await Task.find();
+  const tasks = await Task.find({ status: false }).sort({ createdAt: -1 });
   res.json(tasks);
 };
 

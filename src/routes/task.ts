@@ -1,7 +1,12 @@
 // routes/tasks.ts
 import { Router } from "express";
 import { body } from "express-validator";
-import { getTasks, createTask, updateTask } from "../controllers/task";
+import {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+} from "../controllers/task";
 
 const router = Router();
 
@@ -15,5 +20,6 @@ router.post(
   createTask
 );
 router.put("/:id", updateTask);
+router.delete("/:id", deleteTask);
 
 export default router;

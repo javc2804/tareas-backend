@@ -62,7 +62,7 @@ export const createTask = async (req: Request, res: Response) => {
 
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { title, description, status } = req.body;
+  const { title, description, status, createdAt } = req.body;
 
   if (!id) {
     return res.status(400).send("Se requiere el campo id");
@@ -74,6 +74,7 @@ export const updateTask = async (req: Request, res: Response) => {
       title,
       description,
       status,
+      createdAt,
     });
     res.status(200).json({ ok: true, message: "Tarea actualizada" });
   } catch (error: any) {

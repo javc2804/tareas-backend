@@ -1,4 +1,3 @@
-// src/controllers/UserController.ts
 import { Request, Response } from "express";
 import db from "../config/firebaseConfig";
 import {
@@ -24,8 +23,6 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const loginUser = async (req: Request, res: Response) => {
   const { email } = req.params;
-  console.log(email);
-
   try {
     const usersRef = collection(db, "users");
     const q = query(usersRef, where("email", "==", email));

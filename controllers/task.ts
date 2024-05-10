@@ -1,4 +1,3 @@
-// src/controllers/TaskController.ts
 import { Request, Response } from "express";
 import db from "../config/firebaseConfig";
 import {
@@ -32,7 +31,6 @@ export const getTasks = async (req: Request, res: Response) => {
       ...doc.data(),
     }));
 
-    // Paginate the results using JavaScript
     const paginatedTasks = tasks.slice(
       pageIndex * pageSize,
       (pageIndex + 1) * pageSize
@@ -40,7 +38,7 @@ export const getTasks = async (req: Request, res: Response) => {
 
     res.json(paginatedTasks);
   } catch (error: any) {
-    console.error(error); // Log the error to the console
+    console.error(error);
     res.status(500).send(error.message);
   }
 };

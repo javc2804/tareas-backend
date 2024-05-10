@@ -1,10 +1,9 @@
-// src/routes/userRoutes.ts
 import express from "express";
 import { createUser, loginUser } from "../controllers/user";
 
 const router = express.Router();
 
-router.post("/auth/user", createUser);
-router.post("/auth/login", loginUser);
+router.get("/users/:email", loginUser);
+router.post("/users", createUser);
 
 export default router;

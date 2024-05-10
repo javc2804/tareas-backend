@@ -16,14 +16,15 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const userRef = doc(collection(db, "users"));
     await setDoc(userRef, { email });
-    res.send("Usuario creado");
+    res.status(201).json({ ok: true, message: "Usuario creado" });
   } catch (error: any) {
     res.status(500).send(error.message);
   }
 };
 
 export const loginUser = async (req: Request, res: Response) => {
-  const { email } = req.body;
+  const { email } = req.params;
+  console.log(email);
 
   try {
     const usersRef = collection(db, "users");

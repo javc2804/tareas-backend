@@ -8,17 +8,39 @@ import {
   updateDoc,
   deleteDoc,
   getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 
 export const getTasks = async (req: Request, res: Response) => {
   try {
-    const tasksSnapshot = await getDocs(collection(db, "tasks"));
+    const pageIndex = Number(req.query.pageIndex);
+    const pageSize = Number(req.query.pageSize);
+
+    const tasksRef = collection(db, "tasks");
+    const q = query(
+      tasksRef,
+      where("status", "==", false),
+      orderBy("createdAt", "desc")
+    );
+
+    const tasksSnapshot = await getDocs(q);
     const tasks = tasksSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    res.json(tasks);
+
+    // Paginate the results using JavaScript
+    const paginatedTasks = tasks.slice(
+      pageIndex * pageSize,
+      (pageIndex + 1) * pageSize
+    );
+
+    res.json(paginatedTasks);
   } catch (error: any) {
+    console.error(error); // Log the error to the console
     res.status(500).send(error.message);
   }
 };

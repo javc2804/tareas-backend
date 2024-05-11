@@ -2,9 +2,10 @@
   "name": "tareas-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
-    "start": "node app.js",
+    "prestart": "npm run build",
+    "start": "node dist/app.js",
     "dev": "nodemon --watch '*.ts' --exec 'ts-node' app.ts",
     "build": "tsc"
   },
